@@ -12,14 +12,15 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { AntDesign } from "@expo/vector-icons";
 import Modal from "../components/Modal";
 
+
 const courses = [
   {
     id: 1,
-    name: "CSE 423",
-    semester: "4th semester, 2nd year",
-    teacher: "Dr. Ahmmda Hossain",
+    name: "CSE 4231",
+    semester: "4th Year, 2nd Semester",
+    teacher: "Dr. Ali Hossain",
     teacherDesignation: "Assistant Professor",
-    teacherEducation: "M.Sc Engineering in EEE",
+    teacherEducation: "M.Sc Engineering in CSE",
     teacherImage: require("../assets/user-icon.jpg"),
     courseImage: require("../assets/classroom-bg.jpg"),
     created: "12 February, 2023",
@@ -29,11 +30,25 @@ const courses = [
   },
   {
     id: 2,
-    name: "CSE 3211",
-    semester: "6th semester, 3nd year",
-    teacher: "Dr. Ahmmda Hossain",
-    teacherDesignation: "Assistant Professor",
-    teacherEducation: "M.Sc Engineering in EEE",
+    name: "CSE 4241",
+    semester: "4th Year, 2nd Semester",
+    teacher: "Dr. Mir Salim",
+    teacherDesignation: "Professor",
+    teacherEducation: "M.Sc Engineering in CSE",
+    teacherImage: require("../assets/user-icon.jpg"),
+    courseImage: require("../assets/classroom-bg.jpg"),
+    created: "10 February, 2023",
+    status: "Expired",
+    statusColor: "red",
+    statusText: "Expired 5 days ago",
+  },
+  {
+    id: 3,
+    name: "CSE 4251",
+    semester: "4th Year, 2nd Semester",
+    teacher: "Dr. Siraj Khan",
+    teacherDesignation: "Professor",
+    teacherEducation: "M.Sc Engineering in CSE",
     teacherImage: require("../assets/user-icon.jpg"),
     courseImage: require("../assets/classroom-bg.jpg"),
     created: "10 February, 2023",
@@ -50,25 +65,37 @@ export default function StudentDashboard({ navigation }) {
     setOpen(false);
     navigation.navigate("feedback");
   };
+// Student Profile
+  const handleStudent = () => {
+    setOpen(false);
+    navigation.navigate("StudentProfile");
+  };
+
+  const handleSummary = () => {
+    setOpen(false);
+    navigation.navigate("CourseSummary");
+  };
+
 
   return (
     <SafeAreaProvider>
       <ScrollView className="flex-1 bg-white px-4">
         <View className="flex-1 items-center pt-8 gap-4 pb-10">
           <View className="flex flex-row items-center px-6">
-            {/* TextInput with search icon */}
-            <View className="flex flex-row items-center justify-center w-full rounded-md">
-              <AntDesign name="search1" size={24} color="#777" />
-              <TextInput
-                className="text-base font-semibold border border-gray-300 w-full px-3 py-2 rounded-md -ml-8 pl-10"
-                keyboardType="default"
-                placeholder="Search for a course"
+           
+            <TouchableOpacity onPress={handleStudent}>
+              <Image
+                className="w-10 h-10 rounded-full"
+                source={require("../assets/student.png")}
               />
-            </View>
-            <Image
-              className="w-10 h-10 rounded-full"
-              source={require("../assets/user-icon.jpg")}
-            />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={handleSummary}>
+              <Image
+                className="w-10 h-10 rounded-full"
+                source={require("../assets/score.png")}
+              />
+            </TouchableOpacity>
+            
           </View>
           <View className="w-full px-3">
             <TouchableOpacity
@@ -79,7 +106,8 @@ export default function StudentDashboard({ navigation }) {
             </TouchableOpacity>
           </View>
 
-          <View className="flex space-y-4 self-stretch">
+      {/* Course List */}
+      <View className="flex space-y-4 self-stretch">
             {courses.map((course) => (
               <View
                 key={course.id}
@@ -88,7 +116,7 @@ export default function StudentDashboard({ navigation }) {
                 <View className="relative w-full">
                   <Image
                     source={course.courseImage}
-                    className="absolute top-0 left-0 w-full h-full object-cover"
+                    className="absolute top- left-0 w-full h-full object-cover"
                   />
                   <View className="px-8 py-6 flex gap-1">
                     <Text className="text-gray-100 text-xs font-bold">

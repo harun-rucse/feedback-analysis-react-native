@@ -5,11 +5,16 @@ import Login from "./screens/Login";
 import Register from "./screens/Register";
 import StudentDashboard from "./screens/StudentDashboard";
 import Feedback from "./screens/Feedback";
+import StudentProfile from "./screens/StudentProfile";
+import CourseSummary from "./screens/CourseSummary";
+
+
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
+
     <NavigationContainer>
       <Stack.Navigator initialRouteName="login">
         <Stack.Screen
@@ -40,6 +45,28 @@ export default function App() {
             title: "Feedback",
           }}
         />
+
+      <Stack.Screen
+          name="StudentProfile"
+          component={StudentProfile}
+          options={{
+            title: "Student Profile",
+          }}
+        />
+
+      <Stack.Screen
+          name="CourseSummary"
+          component={CourseSummary}
+          options={{
+            title: "Course Summary",
+          }}
+        />
+
+
+
+      
+
+
       </Stack.Navigator>
     </NavigationContainer>
   );

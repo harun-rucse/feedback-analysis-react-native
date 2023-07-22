@@ -9,6 +9,7 @@ import {
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Checkbox from "expo-checkbox";
 
+
 const Option = () => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
 
@@ -33,7 +34,7 @@ const SingleQuestion = () => {
       </Text>
       <View className="px-6 pt-1">
         <Option />
-        <Option />
+        <Option label="Agree"/>
         <Option />
         <Option />
         <Option />

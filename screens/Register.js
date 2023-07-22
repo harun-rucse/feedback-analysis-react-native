@@ -20,7 +20,7 @@ export default function Register({ navigation }) {
         <View className="flex-1 items-center pt-20 gap-8 px-8">
           <Image
             className="w-24 h-24 rounded-full"
-            source={require("../assets/user.png")}
+            source={require("../assets/user_2.png")}
           />
           <Text className="text-2xl font-bold">Sign up for your account</Text>
           <View className="w-full flex">
