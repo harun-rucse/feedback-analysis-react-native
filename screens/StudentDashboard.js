@@ -1,17 +1,9 @@
 import React, { useState } from "react";
-import {
-  Text,
-  View,
-  Image,
-  TextInput,
-  TouchableOpacity,
-  ScrollView,
-  Pressable,
-} from "react-native";
+import { Text, View, Image, TouchableOpacity, ScrollView } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { AntDesign } from "@expo/vector-icons";
 import Modal from "../components/Modal";
-
+import NavigateModal from "../components/NavigateModal";
 
 const courses = [
   {
@@ -60,12 +52,13 @@ const courses = [
 
 export default function StudentDashboard({ navigation }) {
   const [open, setOpen] = useState(false);
+  const [navigateOpen, setNavigateOpen] = useState(false);
 
   const handleClick = () => {
     setOpen(false);
     navigation.navigate("feedback");
   };
-// Student Profile
+  // Student Profile
   const handleStudent = () => {
     setOpen(false);
     navigation.navigate("StudentProfile");
@@ -76,13 +69,11 @@ export default function StudentDashboard({ navigation }) {
     navigation.navigate("CourseSummary");
   };
 
-
   return (
     <SafeAreaProvider>
       <ScrollView className="flex-1 bg-white px-4">
         <View className="flex-1 items-center pt-8 gap-4 pb-10">
           <View className="flex flex-row items-center px-6">
-           
             <TouchableOpacity onPress={handleStudent}>
               <Image
                 className="w-10 h-10 rounded-full"
@@ -95,7 +86,6 @@ export default function StudentDashboard({ navigation }) {
                 source={require("../assets/score.png")}
               />
             </TouchableOpacity>
-            
           </View>
           <View className="w-full px-3">
             <TouchableOpacity
@@ -106,12 +96,13 @@ export default function StudentDashboard({ navigation }) {
             </TouchableOpacity>
           </View>
 
-      {/* Course List */}
-      <View className="flex space-y-4 self-stretch">
+          {/* Course List */}
+          <View className="flex space-y-4 self-stretch">
             {courses.map((course) => (
-              <View
+              <TouchableOpacity
                 key={course.id}
                 className="flex w-full rounded-md overflow-hidden border border-gray-300"
+                onPress={() => setNavigateOpen(!navigateOpen)}
               >
                 <View className="relative w-full">
                   <Image
@@ -155,11 +146,16 @@ export default function StudentDashboard({ navigation }) {
                     {course.status}
                   </Text>
                 </View>
-              </View>
+              </TouchableOpacity>
             ))}
           </View>
         </View>
         <Modal open={open} setOpen={setOpen} handleClick={handleClick} />
+        <NavigateModal
+          open={navigateOpen}
+          setOpen={setNavigateOpen}
+          navigation={navigation}
+        />
       </ScrollView>
     </SafeAreaProvider>
   );
